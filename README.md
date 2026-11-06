@@ -1,5 +1,10 @@
 # Phone Agent
 
+![build](https://github.com/AtharvaAher26/phone-agent/actions/workflows/build.yml/badge.svg)
+![license](https://img.shields.io/badge/license-MIT-green)
+![platform](https://img.shields.io/badge/platform-Android%208.0%2B-blue)
+![language](https://img.shields.io/badge/language-Kotlin-purple)
+
 **A voice AI assistant for the Android phones that lost theirs.**
 
 When Google retired Assistant in favour of Gemini (Sep 2026), older and budget Androids were left with no working assistant. Phone Agent is a Jarvis-style voice agent built for exactly those phones: speak a command — in **English, Hindi, or Marathi** — and it calls, messages, sets alarms, navigates, and answers, using an LLM brain with a fixed toolbox instead of pattern-matched commands.
