@@ -127,7 +127,7 @@ class Brain(private val apiKey: String) {
 
     companion object {
         private const val API_URL = "https://api.groq.com/openai/v1/chat/completions"
-        private const val MODEL = "llama-3.3-70b-versatile"
+        private const val MODEL = "openai/gpt-oss-120b"
         private val JSON_MEDIA = "application/json; charset=utf-8".toMediaType()
 
         /** The fixed toolbox — the ONLY actions the brain may choose. */
