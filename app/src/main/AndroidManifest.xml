@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Permissions: each one is requested at runtime, at first use. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+
+    <!-- Android 11+ package visibility: declare what we need to see/launch. -->
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.google.android.youtube" />
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:label="Phone Agent"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PhoneAgent">
+
+        <!-- Main screen. Also answers the ASSIST intent so launchers can summon it. -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- THE ASSISTANT SEAT: the three services Android requires before it
+             will list this app under Settings > Default apps > Digital assistant.
+             1) VoiceInteractionService — the entry the system binds to. -->
+        <service
+            android:name=".AssistantService"
+            android:exported="true"
+            android:label="Phone Agent"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <meta-data
+                android:name="android.voice_interaction"
+                android:resource="@xml/voice_interaction_service" />
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+        </service>
+
+        <!-- 2) The session service — creates the session that opens our UI. -->
+        <service
+            android:name=".AssistantSessionService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VOICE_INTERACTION">
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionSessionService" />
+            </intent-filter>
+        </service>
+
+        <!-- 3) Recognition service stub — never used for real recognition
+                (we use SpeechRecognizer in-app), but the system requires the
+                package to declare one before granting the assistant role. -->
+        <service
+            android:name=".StubRecognitionService"
+            android:exported="true"
+            android:label="Phone Agent"
+            android:permission="android.permission.BIND_RECOGNITION_SERVICE">
+            <intent-filter>
+                <action android:name="android.speech.RecognitionService" />
+            </intent-filter>
+        </service>
+
+    </application>
+</manifest>

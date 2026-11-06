@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Describes our voice interaction service to the system.
+     supportsAssist="true" is what makes the app eligible for the
+     default-assistant role (long-press Home). -->
+<voice-interaction-service
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="com.atharva.phoneagent.AssistantSessionService"
+    android:recognitionService="com.atharva.phoneagent.StubRecognitionService"
+    android:supportsAssist="true" />

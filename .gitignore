@@ -1,0 +1,14 @@
+# Android / Gradle
+.gradle/
+build/
+app/build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+# OS
+.DS_Store
+# Secrets — API keys live only on the phone (in-app settings), never in code
+*.keystore
